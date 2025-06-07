@@ -1,0 +1,53 @@
+import pandas as pd
+import plotly.express as px
+from dash import Dash, dcc, html
+
+# Load dataset
+df = pd.read_csv('sales_data.csv', parse_dates=['Order Date'])
+
+# Preprocessing
+df['Month'] = df['Order Date'].dt.to_period('M').astype(str)
+
+# Initialize app
+app = Dash(__name__)
+app.title = "Sales Dashboard"
+
+# Layout
+app.layout = html.Div([
+    html.H1("📊 Sales Dashboard", style={'textAlign': 'center'}),
+    
+    html.Div([
+        html.Div([
+            html.H4("Total Sales"),
+            html.H2(f"${df['Sales'].sum():,.2f}")
+        ], className="card"),
+        
+        html.Div([
+            html.H4("Total Profit"),
+            html.H2(f"${df['Profit'].sum():,.2f}")
+        ], className="card"),
+    ], style={'display': 'flex', 'justifyContent': 'space-around'}),
+    
+    dcc.Graph(
+        figure=px.line(df.groupby('Month').sum().reset_index(), 
+                       x='Month', y='Sales', 
+                       title='Monthly Sales Trend')
+    ),
+    
+    dcc.Graph(
+        figure=px.bar(df.groupby('Region').sum().reset_index(), 
+                      x='Region', y='Sales', 
+                      title='Sales by Region')
+    ),
+    
+    dcc.Graph(
+        figure=px.bar(df.groupby('Product').sum()
+                      .sort_values(by='Sales', ascending=False)
+                      .head(10).reset_index(), 
+                      x='Product', y='Sales', 
+                      title='Top 10 Products by Sales')
+    )
+])
+
+if __name__ == '__main__':
+    app.run_server(debug=True)
