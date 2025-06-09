@@ -27,9 +27,31 @@ This project demonstrates the creation of a professional Power BI dashboard to p
 * Power Query (ETL)
 * Excel / CSV as data source (can be replaced with SQL or other sources)
 * Data modeling (relationships, calculated columns, measures)
+  
+## 📈 Chart Types Used
+The following chart types were used in the dashboard to represent different aspects of the sales data:
+- **Bar Chart**: To compare sales across different regions and products.
+- **Line Chart**: To visualize sales trends over time.
+- **Pie Chart**: To show the percentage contribution of each product category to total sales.
+- **KPI Cards**: To highlight key metrics like Total Sales, Profit, and Quantity Sold.
+- **Map Visualization**: To represent sales by geographical location.
 
+## 🧩 Interactivity
+The dashboard includes several interactive features to enhance the user experience:
+- **Slicers** to filter data by Region, Product Category, and Time Period.
+- **Tooltips** that show detailed information on hover.
+- **Clickable visual elements** to drill down into specific regions or product lines.
+- **Dynamic filtering** across all visualizations for synchronized data exploration.
+
+## 📁 Dataset Used
+The dataset used in this project is a sample sales dataset containing fields such as:
+- Order ID, Order Date, Ship Date
+- Customer Name, Segment, Region
+- Product Category, Sub-Category
+- Sales, Quantity, Discount, Profit
+
+  
 ### 📁 Folder Structure
-
 ```
 📁 PowerBI-Sales-Dashboard
 ├── 📊 SalesDashboard.pbix
